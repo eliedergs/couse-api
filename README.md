@@ -2,7 +2,7 @@
 
 ## Configuração inicial
 
-Configurar um container com o banco de dados
+### Configurar um container com o banco de dados
 
 ```bash
 # usando yarn
@@ -12,7 +12,7 @@ yarn docker:db
 npm run docker:db
 ```
 
-## Rodar migration
+### Rodar migration
 
 ```bash
 # usando yarn
