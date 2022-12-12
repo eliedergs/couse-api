@@ -1,4 +1,4 @@
-import { Genre } from '@/domain/entities/literature.entity';
+import { CourseModelEnum } from '@/domain/interfaces/course';
 import faker from '@faker-js/faker';
 
 export const FORMAT = {
@@ -15,7 +15,10 @@ export const EXAMPLE = {
     PASSWORD: faker.internet.password,
     GENERIC_TITLE: () => faker.lorem.words(3),
     GENERIC_TEXT: faker.lorem.paragraph,
-    GENRE: () => (Math.random() < 0.5 ? Genre.LYRIC : Genre.NARRATIVE),
+    GENRE: () =>
+        Math.random() < 0.5
+            ? CourseModelEnum.ONLINE
+            : CourseModelEnum.PRESENTIAL,
     DATE: new Date(),
 };
 

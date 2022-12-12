@@ -1,6 +1,6 @@
-import CreateLiteratureDto from '@/application/dtos/literature/create-literature.dto';
-import LiteratureEntity from '@/domain/entities/literature.entity';
-import Literature from '@/domain/interfaces/literature';
+import CreateLiteratureDto from '@/application/dtos/course/create-course.dto';
+import LiteratureEntity from '@/domain/entities/course.entity';
+import Literature from '@/domain/interfaces/course';
 import { EXAMPLE } from '@application/utils/constants';
 
 export default class LiteratureMock {

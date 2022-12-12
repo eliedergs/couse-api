@@ -7,7 +7,7 @@
     "license": "UNLICENSED",
     "scripts": {
         "build": "nest build",
-        "dev": "cross-env NODE_ENV=dev nest start --watch",
+        "dev": "nest start --watch",
         "debug": "nest start --debug --watch",
         "start": "nest start",
         "lint:app": "eslint \"./src/**/*.ts\" --fix",
@@ -20,7 +20,7 @@
         "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
         "migration:create": "yarn typeorm migration:create ./src/infrastructure/database/migrations/new-migration",
         "migration:generate": "yarn typeorm migration:generate -p -d ./src/infrastructure/database/config/datasource.ts ./src/infrastructure/database/migrations/new-migration",
-        "migration:run": "yarn typeorm migration:run -d ./src/infrastructure/database/config/datasource.ts",
+        "migration:run": "yarn build && yarn typeorm migration:run -d ./src/infrastructure/database/config/datasource.ts",
         "docker:db": "docker run --name course-db -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=course_db -p 5432:5432 -d postgres",
         "docker:build": "docker build -t api .",
         "docker:run": "docker run -p 3001:3001 -d api"

@@ -1,7 +1,10 @@
 import { EXAMPLE } from '@/application/utils/constants';
 import { fromJSDateToDateFormat } from '@/application/utils/format';
-import { Genre } from '@/domain/entities/literature.entity';
-import Literature from '@/domain/interfaces/literature';
+import {
+    CourseModelEnum,
+    default as Course,
+    default as Literature,
+} from '@/domain/interfaces/course';
 import { ApiProperty } from '@nestjs/swagger';
 import { Expose, plainToInstance, Transform } from 'class-transformer';
 import {
@@ -11,13 +14,14 @@ import {
     IsOptional,
     IsString,
     IsUUID,
+    Length,
     Min,
 } from 'class-validator';
 
-export default class LiteratureDto implements Literature {
+export default class CourseDto implements Course {
     @Expose()
     @ApiProperty({
-        description: 'Id of literature',
+        description: 'Id of course',
         example: EXAMPLE.UUID,
     })
     @IsOptional()
@@ -26,38 +30,42 @@ export default class LiteratureDto implements Literature {
 
     @Expose()
     @ApiProperty({
-        description: 'Title of literature',
+        description: `Title of course`,
         example: EXAMPLE.NAME(),
     })
     @IsNotEmpty()
     @IsString()
-    title: string;
-
-    @Expose()
-    @ApiProperty({
-        description: 'Genre of literature',
-        enum: Genre,
+    @Length(0, 180, {
+        message: 'O nome do curso deve ter no máximo 180 caracteres.',
     })
-    @IsEnum(Genre)
-    genre: Genre;
+    nome: string;
 
     @Expose()
     @ApiProperty({
-        description: 'Max of pericopes allowed in literature',
+        description: 'Model of literature (presential/online)',
+        enum: CourseModelEnum,
+    })
+    @IsEnum(CourseModelEnum, { message: 'Modelo inválido.' })
+    @IsNotEmpty()
+    modelo: CourseModelEnum;
+
+    @Expose()
+    @ApiProperty({
+        description: `Description of course`,
         example: 0,
     })
-    @IsNumber()
-    @Min(0)
-    maxPericopes: number;
+    @IsString()
+    @IsOptional()
+    descricao: string;
 
     @Expose()
     @ApiProperty({
-        description: 'Max size of each pericope in literature',
-        example: 0,
+        description: 'Vacancies of course',
+        example: 2,
     })
     @IsNumber()
-    @Min(0)
-    sizePericope: number;
+    @Min(1, { message: 'O curso deve ter pelo menos uma vaga.' })
+    vagas: number | null;
 
     @Expose()
     @ApiProperty({
@@ -81,28 +89,15 @@ export default class LiteratureDto implements Literature {
     )
     updatedAt: string;
 
-    @Expose()
-    @ApiProperty({
-        description: 'Id of literature',
-        example: EXAMPLE.UUID,
-        required: false,
-    })
-    @IsOptional()
-    @IsUUID()
-    user?: string;
-
     static toDto(partial: Literature) {
-        const userId =
-            typeof partial.user === 'string' ? partial.user : partial.user?.id;
-
         return plainToInstance(
-            LiteratureDto,
-            { ...partial, user: userId },
+            CourseDto,
+            { ...partial },
             { excludeExtraneousValues: true },
         );
     }
 
     static toDtos(partials: Literature[]) {
-        return partials.map((partial) => LiteratureDto.toDto(partial));
+        return partials.map((partial) => CourseDto.toDto(partial));
     }
 }

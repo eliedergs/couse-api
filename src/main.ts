@@ -5,7 +5,7 @@ import * as dotenv from 'dotenv';
 import 'reflect-metadata';
 import { AppModule } from './app.module';
 
-if (process.env.NODE_ENV == 'dev') dotenv.config({ path: './dev.env' });
+dotenv.config({ path: './.env' });
 
 const setupDocs = (app: INestApplication) => {
     const config = new DocumentBuilder()

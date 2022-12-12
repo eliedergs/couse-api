@@ -1,10 +1,10 @@
 import LiteraturePericopesInteractionCountingDto from '@/application/dtos/literature/literature-pericopes-interactions-counting.dto';
 import LiteraturePreviewDto from '@/application/dtos/literature/literature-preview.dto';
 import { InteractionType } from '@/domain/entities/interaction.entity';
-import LiteratureEntity from '@/domain/entities/literature.entity';
+import LiteratureEntity from '@/domain/entities/course.entity';
 import UserEntity from '@/domain/entities/user.entity';
 import { INestApplication } from '@nestjs/common';
-import LiteratureMock from '@test/_fixtures/mocks/literature.mock';
+import LiteratureMock from '@test/_fixtures/mocks/course.mock';
 import {
     initiateAndFeedLiteratures,
     initiateLiteratures,

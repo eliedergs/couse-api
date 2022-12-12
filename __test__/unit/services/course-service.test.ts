@@ -1,9 +1,9 @@
-import FilterLiteratureDto from '@/application/dtos/literature/filter.dto';
-import LiteratureEntity from '@/domain/entities/literature.entity';
-import LiteratureService from '@/domain/services/literature.service';
+import FilterLiteratureDto from '@/application/dtos/course/filter.dto';
+import LiteratureEntity from '@/domain/entities/course.entity';
+import LiteratureService from '@/domain/services/course.service';
 import UserEntity from '@domain/entities/user.entity';
 import { INestApplication } from '@nestjs/common';
-import LiteratureMock from '@test/_fixtures/mocks/literature.mock';
+import LiteratureMock from '@test/_fixtures/mocks/course.mock';
 import {
     initiateLiteratures,
     registerUser,

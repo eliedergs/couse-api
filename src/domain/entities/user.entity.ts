@@ -6,14 +6,9 @@ import {
     Column,
     CreateDateColumn,
     Entity,
-    OneToMany,
     PrimaryGeneratedColumn,
     UpdateDateColumn,
 } from 'typeorm';
-import InteractionEntity from './interaction.entity';
-import LiteratureEntity from './literature.entity';
-import NotificationEntity from './notification.entity';
-import PericopeEntity from './pericope.entity';
 
 @Entity({ name: 'user', orderBy: { createdAt: 'ASC' } })
 export default class UserEntity implements User {
@@ -34,20 +29,6 @@ export default class UserEntity implements User {
 
     @Column({ nullable: true })
     bio: string;
-
-    @OneToMany(() => LiteratureEntity, (literature) => literature.user)
-    literatures: LiteratureEntity[];
-
-    @OneToMany(() => PericopeEntity, (pericope) => pericope.user, {
-        eager: true,
-    })
-    pericopes: PericopeEntity[];
-
-    @OneToMany(() => NotificationEntity, (notification) => notification.user)
-    notifications: NotificationEntity[];
-
-    @OneToMany(() => InteractionEntity, (interaction) => interaction.user)
-    interactions: InteractionEntity[];
 
     @CreateDateColumn()
     createdAt: Date;

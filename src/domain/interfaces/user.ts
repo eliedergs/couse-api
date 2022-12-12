@@ -1,7 +1,3 @@
-import Literature from './literature';
-import Notification from './notification';
-import Pericope from './pericope';
-
 export default interface User {
     id: string;
     name: string;
@@ -9,9 +5,6 @@ export default interface User {
     photo: string;
     password?: string;
     bio: string;
-    literatures?: Literature[];
-    pericopes?: Pericope[];
-    notifications?: Notification[];
     createdAt: Date | string;
     updatedAt: Date | string;
 }
