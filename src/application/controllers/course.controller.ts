@@ -22,7 +22,6 @@ import CreateCourseDto from '../dtos/course/create-course.dto';
 import FilterCourseDto from '../dtos/course/filter.dto';
 import { JwtAuthGuard } from '../guards/jwt-auth.guard';
 
-@ApiBearerAuth()
 @ApiTags('course')
 @Controller('courses')
 export class CourseController {
@@ -32,7 +31,6 @@ export class CourseController {
         description: 'It receives data to create a course',
     })
     @ApiCreatedResponse({ description: 'Course initiated.' })
-    @UseGuards(JwtAuthGuard)
     @Post('')
     @HttpCode(201)
     async createCourse(
@@ -48,13 +46,14 @@ export class CourseController {
     @ApiOkResponse({
         type: [CourseDto],
     })
-    @UseGuards(JwtAuthGuard)
     @Get('/')
     @HttpCode(200)
     async getCourses(
         @Query()
         filter: FilterCourseDto = {},
     ): Promise<CourseDto[]> {
+        console.log(filter);
+
         const courses = await this.courseService.findCoursesByFilter(filter);
 
         return CourseDto.toDtos(courses);
@@ -64,7 +63,6 @@ export class CourseController {
         description: 'List courses by filter with its respective CourseModels',
     })
     @ApiOkResponse()
-    @UseGuards(JwtAuthGuard)
     @Get('/:id')
     @HttpCode(200)
     async getCourseById(
